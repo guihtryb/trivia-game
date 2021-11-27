@@ -1,0 +1,82 @@
+.login-section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-evenly;
+}
+
+.trivia-logo {
+  cursor: pointer;
+  height: 20vh;
+  width: 85vw;
+}
+
+.login-container {
+  align-items: center;
+  background-color: rgb(31, 28, 28);
+  border-radius: 8px;
+  box-shadow: 2px 4px 10px black;
+  display: flex;
+  flex-flow: column wrap;
+  height: 35vh;
+  justify-content: space-evenly;
+  margin: 0 auto;
+  width: 90vw;
+}
+
+.login-inputs-container {
+  align-content: space-between;
+  display: flex;
+  flex-flow: row wrap;
+  height: 18.5vh;
+  justify-content: space-between;
+  width: 78vw;
+}
+
+.login-input {
+  border-color: transparent;
+  font-size: 17px;
+  height: 7vh;
+  outline: none;
+  transition: all ease 0.3s;
+  width: 46vw;
+}
+
+.login-input:hover {
+  border: 1.5px solid red;
+}
+
+.login-button {
+  border: none;
+  font-size: 17px;
+  font-weight: 700;
+  transition: all ease-in-out 0.3s;
+  width: 25.5vw;
+}
+
+.login-button:hover {
+  background-color: rgb(90, 11, 90);
+  color: white;
+}
+
+
+.login-settings {
+  color: white;
+  margin: 0 auto;
+}
+
+@media screen and ( min-width : 700px ) {
+
+  .trivia-logo {
+    width: 70vw;
+  }
+}
+
+@media screen and ( min-width : 1000px ) {
+
+  .trivia-logo {
+    height: 30vh;
+    width: 45vw;
+  }
+}

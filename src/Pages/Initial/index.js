@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import md5 from 'crypto-js/md5';
-
+import '../../Style/Initial.css';
 import PropTypes from 'prop-types';
+import trivia from '../../trivia.png';
+
 import Login from '../../actions';
 
 class Initial extends Component {
@@ -19,6 +21,27 @@ class Initial extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.sendLogin = this.sendLogin.bind(this);
+    this.validLogin = this.validLogin.bind(this);
+  }
+
+  validLogin() {
+    const { email } = this.state;
+    const dotComLength = 3;
+
+    const errorCases = [
+      !email.includes('@'),
+      email.split('@').length > 2,
+      !email.includes('.com'),
+      email.includes('.') && email.split('.')[1].length > dotComLength,
+      email.includes('.') && email.split('.').length > 2,
+    ];
+    const filledCorrect = errorCases.every((error) => error === false);
+
+    if (filledCorrect) {
+      this.setState({ disable: false });
+    } else {
+      this.setState({ disable: true });
+    }
   }
 
   handleChange({ target }) {
@@ -27,7 +50,6 @@ class Initial extends Component {
     if (name && email && value) {
       this.setState({
         [id]: value,
-        disable: false,
         profile: md5(email).toString(),
       });
     } else {
@@ -56,35 +78,51 @@ class Initial extends Component {
   render() {
     const { name, email, disable } = this.state;
     return (
-      <div>
-        <input
-          id="name"
-          data-testid="input-player-name"
-          type="text"
-          onChange={ this.handleChange }
-          placeholder="Name"
-          value={ name }
-        />
+      <section className="login-section">
+        <img src={ trivia } alt="trivia logo" className="trivia-logo" />
+        <div className="login-container">
+          <div className="login-inputs-container">
+            <input
+              autoComplete="off"
+              id="name"
+              data-testid="input-player-name"
+              type="text"
+              onChange={ this.handleChange }
+              placeholder="Name"
+              value={ name }
+              className="login-input"
+            />
+            <button
+              data-testid="btn-play"
+              type="button"
+              disabled={ disable }
+              onClick={ this.sendLogin }
+              className="login-button"
+            >
+              Jogar
+            </button>
+            <input
+              id="email"
+              data-testid="input-gravatar-email"
+              type="text"
+              onChange={ this.handleChange }
+              placeholder="E-mail"
+              value={ email }
+              className="login-input"
+              onKeyUp={ this.validLogin }
+            />
 
-        <input
-          id="email"
-          data-testid="input-gravatar-email"
-          type="text"
-          onChange={ this.handleChange }
-          placeholder="E-mail"
-          value={ email }
-        />
+          </div>
+          <Link
+            to="/configuracoes"
+            data-testid="btn-settings"
+            className="login-settings"
+          >
+            Settings
+          </Link>
+        </div>
 
-        <button
-          data-testid="btn-play"
-          type="button"
-          disabled={ disable }
-          onClick={ this.sendLogin }
-        >
-          Jogar
-        </button>
-        <Link to="/configuracoes" data-testid="btn-settings">Configurações</Link>
-      </div>
+      </section>
     );
   }
 }
