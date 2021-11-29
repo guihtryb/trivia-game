@@ -1,5 +1,6 @@
 .login-section {
   align-items: center;
+  background: url('../Pages/Game/Images/trivia.gif');
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -39,6 +40,7 @@
   font-size: 17px;
   height: 7vh;
   outline: none;
+  text-align: center;
   transition: all ease 0.3s;
   width: 46vw;
 }
@@ -55,9 +57,20 @@
   width: 25.5vw;
 }
 
-.login-button:hover {
+.able {
+  cursor: pointer;
+}
+
+.login-button.able:hover {
   background-color: rgb(90, 11, 90);
   color: white;
+}
+
+.dev-by {
+  bottom: 2.5vh;
+  color: black;
+  font-weight: 600;
+  position: fixed;
 }
 
 

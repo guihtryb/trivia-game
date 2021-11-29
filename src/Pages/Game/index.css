@@ -1,7 +1,109 @@
+.game-section {
+  align-items: center;
+  background: url('./Images/gameBackground.gif');
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-around;
+}
+
+.game-container {
+  align-items: center;
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 60vh;
+  justify-content: space-between;
+  transition: all ease 0.5s;
+  width: 85vw;
+}
+
+.header-player-name {
+  text-align: center;
+}
+
+.profile-score-time-container {
+  align-items: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  font-weight: 600;
+  height: 35vh;
+  justify-content: space-between;
+  width: 30vw;
+}
+
+.profile-score-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  width: 30vw;
+}
+
+.profile-image {
+  border-radius: 100%;
+}
+
+.time {
+  text-align: center;
+  width: 30vw;
+}
+
+.time-bar {
+  background-color: #4466F2;
+  border-radius: 8px;
+  height: 0.4vh;
+  margin-top: 3px;
+  padding: 5px;
+  transition: all ease 2s;
+}
+
+.questions-and-answers {
+  display: flex;
+  flex-direction: column;
+  height: 25vh;
+  justify-content: space-between;
+  text-align: center;
+  width: 85vw;
+  padding-bottom: 10px;
+}
+
+.btn-next {
+  align-self: center;
+  background-color: #533d98;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  height: 6.5vh;
+  margin: 5px 0;
+  transition: all ease 0.3s;
+  width: 22vw;
+}
+
+.answer-option {
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 0.5vh;
+  margin-right: 2vw;
+  padding: 6px;
+  transition: all ease 0.3s;
+}
+
+.answer-option:hover, .btn-next:hover {
+  box-shadow: 1px 1px 15px black;
+}
+
 .green-border {
-  border: 3px solid rgb(6, 240, 15);
+  background-color: rgb(6, 240, 15);
+  border: none;
+  font-weight: 600;
 }
 
 .red-border {
-  border: 3px solid red;
+  background-color: red;
+  border: none;
 }

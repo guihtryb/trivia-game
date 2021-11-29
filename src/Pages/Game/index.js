@@ -1,9 +1,12 @@
+/* eslint-disable max-lines */
+/* eslint-disable max-lines-per-function */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setScore } from '../../actions';
 import './index.css';
 import localHelper from './helper';
+import trivia from '../../trivia.png';
 
 class Game extends Component {
   constructor() {
@@ -19,6 +22,7 @@ class Game extends Component {
       totalScore: 0,
       assertions: 0,
       showButton: true,
+      answerStyle: {},
     };
     this.fetchQuestions = this.fetchQuestions.bind(this);
     this.renderAnswers = this.renderAnswers.bind(this);
@@ -27,6 +31,7 @@ class Game extends Component {
     this.switchValue = this.switchValue.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
     this.nextQuestion = this.nextQuestion.bind(this);
+    this.setBackgroundBarTimeColor = this.setBackgroundBarTimeColor.bind(this);
   }
 
   componentDidMount() {
@@ -40,7 +45,17 @@ class Game extends Component {
       score: 0,
       gravatarEmail: dados.email,
     };
+    this.setBackgroundBarTimeColor();
     localStorage.setItem('state', JSON.stringify({ player: profile }));
+  }
+
+  setBackgroundBarTimeColor(timer) {
+    if (timer < 20) {
+      return 'yellow';
+    }
+    if (timer < 10) {
+      return 'red';
+    }
   }
 
   stopWatch() {
@@ -54,6 +69,7 @@ class Game extends Component {
         clearInterval(this.timer);
         this.setState({
           disable: true,
+          showButton: false,
         });
       }
     }, segundo);
@@ -104,7 +120,14 @@ class Game extends Component {
         gravatarEmail: dados.email,
       };
       localStorage.setItem('state', JSON.stringify({ player: profile }));
-      this.setState({ showButton: false });
+      this.setState({
+        showButton: false,
+        answerStyle: {
+          backdropFilter: 'blur(0)',
+          backgroundColor: '',
+          border: '2px solid red',
+        },
+      });
       return;
     }
     const ten = 10;
@@ -113,6 +136,11 @@ class Game extends Component {
       totalScore: totalScore + total,
       assertions: assertions + 1,
       showButton: false,
+      answerStyle: {
+        backdropFilter: 'blur(0)',
+        backgroundColor: '',
+        border: '2px solid green',
+      },
     });
     const profile = {
       name: dados.name,
@@ -130,9 +158,11 @@ class Game extends Component {
       this.setState({
         questionNumber: questionNumber + 1,
         showButton: true,
+        disable: false,
         timer: 30,
         greenBorder: '',
         redBorder: '',
+        answerStyle: {},
       });
       this.stopWatch();
     } else {
@@ -155,7 +185,7 @@ class Game extends Component {
           <button
             type="button"
             data-testid="correct-answer"
-            className={ greenBorder }
+            className={ `${greenBorder} answer-option` }
             onClick={ this.handleClick }
             disabled={ disable }
           >
@@ -166,7 +196,7 @@ class Game extends Component {
       id += 1;
       return (
         <button
-          className={ redBorder }
+          className={ `${redBorder} answer-option` }
           type="button"
           data-testid={ `wrong-answer-${id}` }
           key={ id }
@@ -181,51 +211,74 @@ class Game extends Component {
 
   render() {
     const { dados: { name, profile } } = this.props;
-    const { loading, questionNumber, timer, showButton } = this.state;
+    const { loading, questionNumber, timer, showButton,
+      answerStyle, totalScore } = this.state;
+    const style = {
+      backgroundColor: (timer < 20 ? 'yellow' : '#4466F2') && (timer < 10 ? 'red' : '#4466F2'),
+      width: `${timer}vh`,
+    };
+
     if (loading) return <h1>loading</h1>;
     const { questions } = this.state;
     return (
-      <div>
-        <header>
-          <h1 data-testid="header-player-name">
-            { name }
-          </h1>
-          <img
-            src={ `https://www.gravatar.com/avatar/${profile}` }
-            alt="profile"
-            data-testid="header-profile-picture"
-          />
-          <span data-testid="header-score">0</span>
-          <span>
-            { timer }
-          </span>
-        </header>
-        <div>
-          <span data-testid="question-category">
-            {
-              questions[questionNumber].category
-            }
-          </span>
-          <span data-testid="question-text">
-            {
-              questions[questionNumber].question
-            }
-          </span>
-          <span>
-            {
-              this.renderAnswers() // teste do git
-            }
-          </span>
-          <button
-            type="button"
-            data-testid="btn-next"
-            hidden={ showButton }
-            onClick={ this.nextQuestion }
-          >
-            Próxima
-          </button>
+      <section className="game-section">
+        <img src={ trivia } alt="trivia logo" className="trivia-logo" />
+        <div className="game-container" style={ answerStyle }>
+          <header>
+            <h1 data-testid="header-player-name" className="header-player-name">
+              { `~ ${name} ~` }
+            </h1>
+          </header>
+          <div className="profile-score-time-container">
+            <div className="profile-score-container">
+              <img
+                src={ `https://www.gravatar.com/avatar/${profile}` }
+                alt="profile"
+                data-testid="header-profile-picture"
+                className="profile-image"
+              />
+              <span data-testid="header-score">{ `Score: ${totalScore}` }</span>
+            </div>
+            <div className="time">
+              <span>
+                { timer }
+              </span>
+              <div
+                className="time-bar"
+                style={ style }
+              >
+                { ' ' }
+              </div>
+            </div>
+          </div>
+          <div className="questions-and-answers">
+            <span data-testid="question-category">
+              {
+                questions[questionNumber].category
+              }
+            </span>
+            <span data-testid="question-text">
+              {
+                questions[questionNumber].question
+              }
+            </span>
+            <span>
+              {
+                this.renderAnswers() // teste do git
+              }
+            </span>
+            <button
+              type="button"
+              data-testid="btn-next"
+              className="btn-next"
+              hidden={ showButton }
+              onClick={ this.nextQuestion }
+            >
+              Próxima
+            </button>
+          </div>
         </div>
-      </div>
+      </section>
     );
   }
 }

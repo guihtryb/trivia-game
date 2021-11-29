@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
@@ -25,10 +26,11 @@ class Initial extends Component {
   }
 
   validLogin() {
-    const { email } = this.state;
+    const { email, name } = this.state;
     const dotComLength = 3;
-
+    const nameMinLength = 4;
     const errorCases = [
+      name.length < nameMinLength,
       !email.includes('@'),
       email.split('@').length > 2,
       !email.includes('.com'),
@@ -90,6 +92,7 @@ class Initial extends Component {
               onChange={ this.handleChange }
               placeholder="Name"
               value={ name }
+              onKeyUp={ this.validLogin }
               className="login-input"
             />
             <button
@@ -97,7 +100,7 @@ class Initial extends Component {
               type="button"
               disabled={ disable }
               onClick={ this.sendLogin }
-              className="login-button"
+              className={ disable ? 'login-button' : 'login-button able' }
             >
               Jogar
             </button>
@@ -121,7 +124,7 @@ class Initial extends Component {
             Settings
           </Link>
         </div>
-
+        <span className="dev-by">&copy; Guilherme Viana</span>
       </section>
     );
   }
