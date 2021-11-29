@@ -1,3 +1,14 @@
+.loading-container {
+  align-items: center;
+  background: url('./Images/gameBackground.gif');
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  font-size: 30px;
+  height: 100vh;
+  justify-content: space-around;
+}
+
 .game-section {
   align-items: center;
   background: url('./Images/gameBackground.gif');
@@ -19,6 +30,34 @@
   justify-content: space-between;
   transition: all ease 0.5s;
   width: 85vw;
+}
+
+@media ( prefers-reduced-motion : no-preference ) {
+
+  .App-logo {
+    animation: shake infinite 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    margin: auto;
+    width: 80vw;
+  }
+}
+
+@keyframes shake {
+
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
 
 .header-player-name {
@@ -44,6 +83,7 @@
 
 .profile-image {
   border-radius: 100%;
+  width: 65px;
 }
 
 .time {
@@ -55,6 +95,7 @@
   background-color: #4466F2;
   border-radius: 8px;
   height: 0.4vh;
+  margin: 0 auto;
   margin-top: 3px;
   padding: 5px;
   transition: all ease 2s;
@@ -65,9 +106,9 @@
   flex-direction: column;
   height: 25vh;
   justify-content: space-between;
+  padding-bottom: 10px;
   text-align: center;
   width: 85vw;
-  padding-bottom: 10px;
 }
 
 .btn-next {
@@ -80,7 +121,7 @@
   height: 6.5vh;
   margin: 5px 0;
   transition: all ease 0.3s;
-  width: 22vw;
+  width: 200px;
 }
 
 .answer-option {

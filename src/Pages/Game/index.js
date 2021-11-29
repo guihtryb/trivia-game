@@ -218,7 +218,19 @@ class Game extends Component {
     };
 
     const { questions } = this.state;
-    if (loading || Object.values(questions).length < 1) return <h1>loading</h1>;
+    if (loading || Object.values(questions).length < 1) {
+      return (
+        <div className="loading-container">
+          <img
+            src={ trivia }
+            alt="trivia logo"
+            data-testid="header-profile-picture"
+            className="App-logo"
+          />
+          <i><h1>Loading...</h1></i>
+        </div>
+      );
+    }
     return (
       <section className="game-section">
         <img src={ trivia } alt="trivia logo" className="trivia-logo" />
