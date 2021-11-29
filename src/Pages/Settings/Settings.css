@@ -1,0 +1,13 @@
+.settings-section {
+  background-color: #151515;
+  color: white;
+  height: 100vh;
+  margin: 0;
+  overflow: auto;
+}
+
+.settings-section h1 {
+  font-size: 35px;
+  letter-spacing: 0.2vw;
+  margin-left: 20px;
+}
