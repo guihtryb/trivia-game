@@ -131,7 +131,6 @@
   margin-bottom: 0.5vh;
   margin-right: 2vw;
   padding: 6px;
-  transition: all ease 0.3s;
 }
 
 .answer-option:hover, .btn-next:hover {
