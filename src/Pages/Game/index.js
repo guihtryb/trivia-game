@@ -31,7 +31,7 @@ class Game extends Component {
     this.switchValue = this.switchValue.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
     this.nextQuestion = this.nextQuestion.bind(this);
-    this.setBackgroundBarTimeColor = this.setBackgroundBarTimeColor.bind(this);
+    this.switchTimeBar = this.switchTimeBar.bind(this);
   }
 
   componentDidMount() {
@@ -45,17 +45,7 @@ class Game extends Component {
       score: 0,
       gravatarEmail: dados.email,
     };
-    this.setBackgroundBarTimeColor();
     localStorage.setItem('state', JSON.stringify({ player: profile }));
-  }
-
-  setBackgroundBarTimeColor(timer) {
-    if (timer < 20) {
-      return 'yellow';
-    }
-    if (timer < 10) {
-      return 'red';
-    }
   }
 
   stopWatch() {
@@ -77,7 +67,9 @@ class Game extends Component {
 
   async fetchQuestions() {
     const { dados: { token } } = this.props;
-    const response = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
+    const defaultToken = token === undefined
+      ? 'a2abf8fd177c66dab22a9d4091789330a889e39e6d2e04dc2bb1fb0ec2c20198' : token;
+    const response = await fetch(`https://opentdb.com/api.php?amount=5&token=${defaultToken}`);
     const data = await response.json();
     this.setState({
       questions: data.results,
@@ -97,6 +89,13 @@ class Game extends Component {
     default:
       return 0;
     }
+  }
+
+  switchTimeBar() {
+    const { timer } = this.state;
+    if (timer < 20 && timer > 10) return 'yellow';
+    if (timer < 10) return 'red';
+    return '#4466F2';
   }
 
   stopTimer() {
@@ -214,12 +213,12 @@ class Game extends Component {
     const { loading, questionNumber, timer, showButton,
       answerStyle, totalScore } = this.state;
     const style = {
-      backgroundColor: (timer < 20 ? 'yellow' : '#4466F2') && (timer < 10 ? 'red' : '#4466F2'),
+      backgroundColor: this.switchTimeBar(),
       width: `${timer}vh`,
     };
 
-    if (loading) return <h1>loading</h1>;
     const { questions } = this.state;
+    if (loading || Object.values(questions).length < 1) return <h1>loading</h1>;
     return (
       <section className="game-section">
         <img src={ trivia } alt="trivia logo" className="trivia-logo" />
@@ -252,7 +251,7 @@ class Game extends Component {
             </div>
           </div>
           <div className="questions-and-answers">
-            <span data-testid="question-category">
+            <span data-testid="question-category" className="question-category">
               {
                 questions[questionNumber].category
               }

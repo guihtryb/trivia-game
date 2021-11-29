@@ -107,3 +107,7 @@
   background-color: red;
   border: none;
 }
+
+.question-category {
+  font-weight: 700;
+}
