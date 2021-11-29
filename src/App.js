@@ -8,7 +8,9 @@ import Settings from './Pages/Settings';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter
+      basename="/trivia-game"
+    >
       <Switch>
         <Route exact path="/" component={ Initial } />
         <Route exact path="/configuracoes" component={ Settings } />
