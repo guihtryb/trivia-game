@@ -23,6 +23,7 @@ class Game extends Component {
       assertions: 0,
       showButton: true,
       answerStyle: {},
+      answer: '',
     };
     this.fetchQuestions = this.fetchQuestions.bind(this);
     this.renderAnswers = this.renderAnswers.bind(this);
@@ -120,7 +121,9 @@ class Game extends Component {
       };
       localStorage.setItem('state', JSON.stringify({ player: profile }));
       this.setState({
+        disable: true,
         showButton: false,
+        answer: questions[questionNumber].correct_answer,
         answerStyle: {
           backdropFilter: 'blur(0)',
           backgroundColor: '',
@@ -132,9 +135,11 @@ class Game extends Component {
     const ten = 10;
     const total = ten + (timer * this.switchValue(difficulty));
     this.setState({
+      disable: true,
       totalScore: totalScore + total,
       assertions: assertions + 1,
       showButton: false,
+      answer: questions[questionNumber].correct_answer,
       answerStyle: {
         backdropFilter: 'blur(0)',
         backgroundColor: '',
@@ -162,6 +167,7 @@ class Game extends Component {
         greenBorder: '',
         redBorder: '',
         answerStyle: {},
+        answer: '',
       });
       this.stopWatch();
     } else {
@@ -217,7 +223,7 @@ class Game extends Component {
       width: `${timer}vw`,
     };
 
-    const { questions } = this.state;
+    const { questions, answer } = this.state;
     if (loading || Object.values(questions).length < 1) {
       return (
         <div className="loading-container">
@@ -270,8 +276,11 @@ class Game extends Component {
             </span>
             <span data-testid="question-text">
               {
-                questions[questionNumber].question
+                `${questions[questionNumber].question}`
               }
+              <span style={ { fontWeight: '700' } }>
+                {answer}
+              </span>
             </span>
             <span>
               {
