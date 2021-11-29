@@ -214,7 +214,7 @@ class Game extends Component {
       answerStyle, totalScore } = this.state;
     const style = {
       backgroundColor: this.switchTimeBar(),
-      width: `${timer}vh`,
+      width: `${timer}vw`,
     };
 
     const { questions } = this.state;
