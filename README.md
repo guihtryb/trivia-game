@@ -14,6 +14,7 @@
 ![CSS3](https://img.shields.io/badge/-CSS-3E86B8?style=flat&logo=css3)
 ![HTML5](https://img.shields.io/badge/-HTML5-white?style=flat&logo=HTML5)
 [![Visual Studio Code](https://img.shields.io/badge/-VSCode-111111?style=flat&logo=visual-studio-code&logoColor=007ACC)](https://github.com/microsoft/vscode)
+
 </div>
 
 <h2 align="center"> Sobre o projeto </h2>
@@ -30,3 +31,6 @@
   <li> Entre na pasta <i>trivia-game</i> e rode o comando <code> npm install</code> no terminal para instalar as dependências.</li> 
   <li> Por fim, rode o comando <code>npm start</code> no terminal e uma janela do navegador abrirá com o projeto.</li> 
   </ol>
+
+<h2> Live On </h2>
+<p>Divirta-se <a href="https://guihtryb.github.io/trivia-game/">clicando aqui</a></p>
