@@ -33,4 +33,4 @@
   </ol>
 
 <h2> Live On </h2>
-<p>Para jogar<a href="https://guihtryb.github.io/trivia-game/">clique aqui</a></p>
+<p>Para jogar <a href="https://guihtryb.github.io/trivia-game/">clique aqui</a></p>
