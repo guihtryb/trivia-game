@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import './Feedback.css';
 
 class Feedback extends Component {
+  // eslint-disable-next-line max-lines-per-function
   render() {
     const { dados, history } = this.props;
     const { name, profile, score, assertions } = dados;
@@ -12,10 +13,19 @@ class Feedback extends Component {
         <div className="feedback-container">
           <header>
             <span data-testid="feedback-text">Feedback</span>
-            <p data-testid="header-player-name">{ name }</p>
-            <p data-testid="header-score">{ score }</p>
-            <p data-testid="feedback-total-score">{ score }</p>
-            <p data-testid="feedback-total-question">{ assertions }</p>
+            <p data-testid="header-player-name">
+              {`Player: ${name}`}
+            </p>
+            <p data-testid="feedback-total-score">
+              Final Score
+              <br />
+              { score }
+            </p>
+            <p data-testid="feedback-total-question">
+              Assertions
+              <br />
+              { assertions }
+            </p>
             <img
               src={ `https://www.gravatar.com/avatar/${profile}` }
               alt="gravatar"

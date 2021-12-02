@@ -124,7 +124,6 @@ class Initial extends Component {
             Settings
           </Link>
         </div>
-        <span className="dev-by">&copy; Guilherme Viana</span>
       </section>
     );
   }
