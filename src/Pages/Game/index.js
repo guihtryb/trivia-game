@@ -95,7 +95,7 @@ class Game extends Component {
   switchTimeBar() {
     const { timer } = this.state;
     if (timer < 20 && timer > 10) return 'yellow';
-    if (timer < 10) return 'red';
+    if (timer <= 10) return 'red';
     return '#4466F2';
   }
 
@@ -179,7 +179,7 @@ class Game extends Component {
   }
 
   renderAnswers() {
-    const { questions, questionNumber, redBorder, greenBorder, disable } = this.state; // Testando o git hub
+    const { questions, questionNumber, redBorder, greenBorder, disable } = this.state;
     const answers = [...questions[questionNumber].incorrect_answers,
       questions[questionNumber].correct_answer];
     const index = -1;
